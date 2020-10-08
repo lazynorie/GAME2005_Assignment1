@@ -192,25 +192,37 @@ void PlayScene::GUI_Function() const
 	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
 	//ImGui::ShowDemoWindow();
 	
-	ImGui::Begin("Your Window Title Goes Here", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
-
-	if(ImGui::Button("My Button"))
+	ImGui::Begin("Physics Controll", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+	
+	bool buttonPressed = ImGui::Button("Throw");
+	if (buttonPressed)
 	{
-		std::cout << "My Button Pressed" << std::endl;
+		std::cout << "Throw button pressed" << std:: endl;
 	}
-
 	ImGui::Separator();
 
-	static float float3[3] = { 0.0f, 1.0f, 1.5f };
-	if(ImGui::SliderFloat3("My Slider", float3, 0.0f, 2.0f))
+	static bool isGravityEnabled = false;
+	ImGui::Checkbox("Gravity",&isGravityEnabled);
+	/*if (isGravityEnabled)
 	{
-		std::cout << float3[0] << std::endl;
-		std::cout << float3[1] << std::endl;
-		std::cout << float3[2] << std::endl;
-		std::cout << "---------------------------\n";
+		std::cout << " Gravity On" << std::endl;
+	}
+	else
+	{
+		std::cout << " Gravity Off" << std::endl;
+
+	}*/
+
+
+
+	static int xPlayerPos = 400;
+	if (ImGui::SliderInt("Player Position X", &xPlayerPos, 0, 800))
+	{
+		m_pPlayer->getTransform()->position.x = xPlayerPos;
 	}
 	
 	ImGui::End();
+	ImGui::EndFrame();
 
 	// Don't Remove this
 	ImGui::Render();
