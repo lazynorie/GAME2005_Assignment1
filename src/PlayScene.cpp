@@ -194,11 +194,14 @@ void PlayScene::GUI_Function() const
 	
 	ImGui::Begin("Physics Controll", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 	
-	bool buttonPressed = ImGui::Button("Throw");
-	if (buttonPressed)
+	if (ImGui::Button("Throw"))
+	{
+		m_pBall->doThrow();
+	}
+	/*if (buttonPressed)
 	{
 		std::cout << "Throw button pressed" << std:: endl;
-	}
+	}*/
 	ImGui::Separator();
 
 	static bool isGravityEnabled = false;
@@ -215,15 +218,21 @@ void PlayScene::GUI_Function() const
 		std::cout << " Gravity Off" << std::endl;
 
 	}*/
-
-
-
-	static int xPlayerPos = 400;
+	static int xPlayerPos = 300;
 	if (ImGui::SliderInt("Player Position X", &xPlayerPos, 0, 800))
 	{
 		m_pPlayer->getTransform()->position.x = xPlayerPos;
+		//m_pBall->isGravityEnabled = isGravityEnabled;
+		m_pBall->throwposition= glm::vec2(xPlayerPos, 300);
+
 	}
 	
+	static float velocity[2] = { 0,0 };
+	if (ImGui::SliderFloat2("Throw Speed", velocity, 0, 200))
+	{
+		m_pBall->throwspeed = glm::vec2(velocity[0], -velocity[1]);
+	}
+
 	ImGui::End();
 	ImGui::EndFrame();
 

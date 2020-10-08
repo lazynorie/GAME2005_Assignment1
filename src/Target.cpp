@@ -45,10 +45,17 @@ void Target::m_move()
 	glm::vec2 gravity = glm::vec2(0, 9.8f);
 
 	
-	getRigidBody()->velocity += (getRigidBody()->acceleration+gravity) * deltaTime;
-
-	if (!isGravityEnabled) getRigidBody()->velocity.y = 0;
 	
+
+	/*if (!isGravityEnabled) getRigidBody()->velocity.y = 0;*/
+	if (isGravityEnabled)
+	{
+		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
+	}
+	else
+	{ 
+		getRigidBody()->velocity += getRigidBody()->acceleration * deltaTime;
+	}
 	getTransform()->position += getRigidBody()->velocity * deltaTime;
 }
 
@@ -58,4 +65,11 @@ void Target::m_checkBounds()
 
 void Target::m_reset()
 {
+}
+
+void Target::doThrow()
+{
+	getTransform()->position = throwposition;
+	getRigidBody()->velocity = throwspeed;
+
 }

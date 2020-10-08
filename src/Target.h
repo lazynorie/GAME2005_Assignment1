@@ -15,6 +15,11 @@ public:
 	virtual void clean() override;
 	bool isGravityEnabled = false;
 
+	glm::vec2 throwspeed;
+	glm::vec2 throwposition;
+
+	void doThrow();
+
 private:
 	void m_move();
 	void m_checkBounds();
