@@ -127,9 +127,9 @@ void PlayScene::start()
 	// Set GUI Title
 	m_guiTitle = "Play Scene";
 	
-	// Plane Sprite
-	m_pPlaneSprite = new Plane();
-	addChild(m_pPlaneSprite);
+	//Ball
+	m_pBall = new Target();
+	addChild(m_pBall);
 
 	// Player Sprite
 	m_pPlayer = new Player();
@@ -202,7 +202,10 @@ void PlayScene::GUI_Function() const
 	ImGui::Separator();
 
 	static bool isGravityEnabled = false;
-	ImGui::Checkbox("Gravity",&isGravityEnabled);
+	if (ImGui::Checkbox("Gravity", &isGravityEnabled))
+	{
+		m_pBall->isGravityEnabled = isGravityEnabled;
+	}
 	/*if (isGravityEnabled)
 	{
 		std::cout << " Gravity On" << std::endl;

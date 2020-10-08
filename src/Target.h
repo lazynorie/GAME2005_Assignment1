@@ -13,6 +13,7 @@ public:
 	virtual void draw() override;
 	virtual void update() override;
 	virtual void clean() override;
+	bool isGravityEnabled = false;
 
 private:
 	void m_move();
