@@ -10,7 +10,7 @@
 #include "Renderer.h"
 
 
-const int mpp = 1;
+const int mpp = 2;
 
 PlayScene::PlayScene()
 {
@@ -270,8 +270,8 @@ void PlayScene::GUI_Function() const
 	
 	if ((ImGui::SliderFloat("Thrown angle", &ballAngle, 0, 90)) /*&& (ImGui::SliderFloat("Ball speed is: ", &ballSpeed, 0, 200))*/ ) {
 		angleRad = (ballAngle / 180) * M_PI;
-		velocity[0] = ballSpeed * cos(angleRad)*mpp;
-		velocity[1] = ballSpeed * sin(angleRad)*mpp;
+		velocity[0] = ballSpeed * cos(angleRad);
+		velocity[1] = ballSpeed * sin(angleRad);
 		m_pBall->throwspeed = glm::vec2(velocity[0], -velocity[1]);
 		
 	}
