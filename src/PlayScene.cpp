@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "EventManager.h"
 
+
 // required for IMGUI
 #include "imgui.h"
 #include "imgui_sdl.h"
@@ -18,6 +19,7 @@ PlayScene::~PlayScene()
 void PlayScene::draw()
 {
 	TextureManager::Instance()->draw("background",400,300,0,255,true);
+	TextureManager::Instance()->draw("enemy", 700, 300, 0, 255, true);
 
 	
 
@@ -122,6 +124,8 @@ void PlayScene::start()
 {
 	//Loads the background textrue from the disk into RAM
 	TextureManager::Instance()->load("../Assets/textures/Background.jpg","background");
+	
+
 
 
 	// Set GUI Title
@@ -134,7 +138,11 @@ void PlayScene::start()
 	// Player Sprite
 	m_pPlayer = new Player();
 	addChild(m_pPlayer);
-	m_playerFacingRight = true;
+	m_playerFacingRight = false;
+	
+	m_pEnemy = new Player();
+	addChild(m_pEnemy);
+	m_playerFacingRight = false;
 
 	// Back Button
 	m_pBackButton = new Button("../Assets/textures/backButton.png", "backButton", BACK_BUTTON);
@@ -218,12 +226,19 @@ void PlayScene::GUI_Function() const
 		std::cout << " Gravity Off" << std::endl;
 
 	}*/
-	static int xPlayerPos = 300;
+	static int xPlayerPos = 100;
 	if (ImGui::SliderInt("Player Position X", &xPlayerPos, 0, 800))
 	{
 		m_pPlayer->getTransform()->position.x = xPlayerPos;
 		//m_pBall->isGravityEnabled = isGravityEnabled;
 		m_pBall->throwposition= glm::vec2(xPlayerPos, 300);
+
+	}
+	static int xEnemyPos = 700;
+	if (ImGui::SliderInt("Enemy Position X", &xEnemyPos, 0, 800))
+	{
+		m_pEnemy->getTransform()->position.x = xEnemyPos;
+		
 
 	}
 	
