@@ -266,10 +266,21 @@ void PlayScene::GUI_Function() const
 	ImGui::Value("The mass of the ball is: ", mass);
 
 
-	glm::vec2 acc = m_pBall->getRigidBody()->acceleration;
-	ImGui::Value("The acceleration of the ball is: ", acc.y);
+	/*glm::vec2 acc = m_pBall->getRigidBody()->acceleration;
+	ImGui::Value("The acceleration of the ball is: ", acc.y);*/
 	
-	
+
+	float accc;
+	if (isGravityEnabled)
+	{
+		accc=-9.8;
+	}
+	else
+	{
+		accc=0;
+	}
+	ImGui::Value("The acceleration of the ball is : ", accc);
+
 
 
 
