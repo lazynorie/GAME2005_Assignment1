@@ -1,7 +1,7 @@
 #include "Target.h"
 #include "TextureManager.h"
 
-
+const int mpp = 2;
 
 Target::Target()
 {
@@ -55,13 +55,13 @@ void Target::m_move()
 	/*if (!isGravityEnabled) getRigidBody()->velocity.y = 0;*/
 	if (isGravityEnabled)
 	{
-		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
+		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * (mpp * deltaTime);
 	}
 	else
 	{ 
-		getRigidBody()->velocity += getRigidBody()->acceleration * deltaTime;
+		getRigidBody()->velocity += getRigidBody()-> acceleration * (deltaTime* mpp) ;
 	}
-	getTransform()->position += getRigidBody()->velocity * deltaTime;
+	getTransform()->position += getRigidBody()->velocity * (deltaTime*mpp);
 }
 
 void Target::m_checkBounds()

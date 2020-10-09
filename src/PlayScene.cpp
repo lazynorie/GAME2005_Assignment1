@@ -8,6 +8,10 @@
 #include "imgui_sdl.h"
 #include "Renderer.h"
 
+
+const int mpp = 2;
+
+
 PlayScene::PlayScene()
 {
 	PlayScene::start();
@@ -204,7 +208,7 @@ void PlayScene::GUI_Function() const
 	
 	ImGui::Begin("Physics Controll", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 
-	ImGui::Text("The scale is 1:1 ");
+	ImGui::Value("The scale is 1:",mpp);
 	
 	if (ImGui::Button("Throw"))
 	{
