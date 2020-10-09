@@ -208,7 +208,7 @@ void PlayScene::GUI_Function() const
 	
 	ImGui::Begin("Physics Controll", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 
-	ImGui::Value("The scale is 1:",mpp);
+	ImGui::Value("The scale is 1",mpp);
 	
 	if (ImGui::Button("Throw"))
 	{
