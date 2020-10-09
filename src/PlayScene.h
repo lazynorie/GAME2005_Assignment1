@@ -38,7 +38,10 @@ private:
 	// UI Items
 	Button* m_pBackButton;
 	Button* m_pNextButton;
-	Label* m_pInstructionsLabel;
+	Label* m_pInstructionsLabel_1;
+
+	Label* m_pInstructionsLabel_2;
+
 };
 
 #endif /* defined (__PLAY_SCENE__) */

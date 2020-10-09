@@ -14,7 +14,7 @@ StartScene::~StartScene()
 
 void StartScene::draw()
 {
-	//TextureManager::Instance()->draw("mugshot", 400, 300, 0, 255, true);
+	TextureManager::Instance()->draw("background", 400, 300, 0, 255, true);
 
 	drawDisplayList();
 }
@@ -47,26 +47,35 @@ void StartScene::handleEvents()
 
 void StartScene::start()
 {
-	//TextureManager::Instance()->load("../Assets/textures/titlescreen.png", "mugshot");
+	TextureManager::Instance()->load("../Assets/textures/Background.jpg", "background");
 
-	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_pStartLabel = new Label("START SCENE", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
+	const SDL_Color blue = { 237, 244, 255, 255 };//light blue
+
+	m_pTitleLabel = new Label("STAR WAR", "Consolas", 125, blue, glm::vec2(500.0f, 100.0f));
+	m_pTitleLabel->setParent(this);
+	addChild(m_pTitleLabel);
+
+	m_pStartLabel = new Label("Thermal Detonator Throwing Simulator", "Consolas", 40, blue, glm::vec2(500.0f, 200.0f));
 	m_pStartLabel->setParent(this);
 	addChild(m_pStartLabel);
 
-	m_pInstructionsLabel = new Label("Press 1 to Play", "Consolas", 40, blue, glm::vec2(400.0f, 120.0f));
+	m_pInstructionsLabel = new Label("Press 1 to Play", "Consolas", 40, blue, glm::vec2(500.0f, 320.0f));
 	m_pInstructionsLabel->setParent(this);
 	addChild(m_pInstructionsLabel);
 
-	m_pStudent1Lable = new Label("Jing Yuan Cheng, 101257237", "Consolas", 40, blue, glm::vec2(400.0f, 160.0f));
+	m_GroupLable = new Label("Our Team", "Consolas", 30, blue, glm::vec2(500.0f, 410.0f));
+	m_GroupLable->setParent(this);
+	addChild(m_GroupLable);
+
+	m_pStudent1Lable = new Label("Jing Yuan Cheng, 101257237", "Consolas", 20, blue, glm::vec2(500.0f, 440.0f));
 	m_pStudent1Lable->setParent(this);
 	addChild(m_pStudent1Lable);
 
-	m_pStudent2Lable = new Label("Feng Xiao, 101100713", "Consolas", 40, blue, glm::vec2(400.0f, 200.0f));
+	m_pStudent2Lable = new Label("Feng Xiao, 101100713", "Consolas", 20, blue, glm::vec2(500.0f, 460.0f));
 	m_pStudent2Lable->setParent(this);
 	addChild(m_pStudent2Lable);
 
-	m_pStudent3Lable = new Label(" Wanhao Sun, 101277502", "Consolas", 40, blue, glm::vec2(400.0f, 240.0f));
+	m_pStudent3Lable = new Label(" Wanhao Sun, 101277502", "Consolas", 20, blue, glm::vec2(500.0f, 480.0f));
 	m_pStudent3Lable->setParent(this);
 	addChild(m_pStudent3Lable);
 
@@ -77,7 +86,7 @@ void StartScene::start()
 
 	// Start Button
 	m_pStartButton = new Button();
-	m_pStartButton->getTransform()->position = glm::vec2(400.0f, 400.0f); 
+	m_pStartButton->getTransform()->position = glm::vec2(500.0f, 550.0f); 
 
 	m_pStartButton->addEventListener(CLICK, [&]()-> void
 	{

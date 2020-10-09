@@ -1,18 +1,19 @@
 #include "Target.h"
 #include "TextureManager.h"
-
+#include <iostream>
+using namespace std;
 const int mpp = 2;
 
 Target::Target()
 {
-	TextureManager::Instance()->load("../Assets/textures/Circle.png","circle");
+	TextureManager::Instance()->load("../Assets/textures/Circle.png", "circle");
 
 	const auto size = TextureManager::Instance()->getTextureSize("circle");
-	
+
 
 	setWidth(size.x);
 	setHeight(size.y);
-	getTransform()->position = glm::vec2(100.0f, 100.0f);
+	getTransform()->position = glm::vec2(100.0f, 400.0f);
 	getRigidBody()->velocity = glm::vec2(0, 0);
 	getRigidBody()->isColliding = false;
 
@@ -30,8 +31,6 @@ void Target::draw()
 
 	// draw the target
 	TextureManager::Instance()->draw("circle", x, y, 0, 255, true);
-	
-
 }
 
 void Target::update()
@@ -49,19 +48,21 @@ void Target::m_move()
 	float deltaTime = 1.0f / 60.0f;
 	glm::vec2 gravity = glm::vec2(0, 9.8f);
 
-	
-	
+	cout << getTransform()->position.y << endl;
 
-	/*if (!isGravityEnabled) getRigidBody()->velocity.y = 0;*/
-	if (isGravityEnabled)
-	{
-		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * (mpp * deltaTime);
+	if (getTransform()->position.y <= 400) {
+		/*if (!isGravityEnabled) getRigidBody()->velocity.y = 0;*/
+		if (isGravityEnabled)
+		{
+			getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * (mpp * deltaTime);
+		}
+		else
+		{
+			getRigidBody()->velocity += getRigidBody()->acceleration * (deltaTime * mpp);
+		}
+		getTransform()->position += getRigidBody()->velocity * (deltaTime * mpp);
+
 	}
-	else
-	{ 
-		getRigidBody()->velocity += getRigidBody()-> acceleration * (deltaTime* mpp) ;
-	}
-	getTransform()->position += getRigidBody()->velocity * (deltaTime*mpp);
 }
 
 void Target::m_checkBounds()

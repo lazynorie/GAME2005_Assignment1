@@ -21,8 +21,10 @@ public:
 	virtual void start() override;
 	
 private:
+	Label* m_pTitleLabel{};
 	Label* m_pStartLabel{};
 	Label* m_pInstructionsLabel{};
+	Label* m_GroupLable{};
 	Label* m_pStudent1Lable{};
 	Label* m_pStudent2Lable{};
 	Label* m_pStudent3Lable{};
