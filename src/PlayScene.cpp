@@ -19,7 +19,6 @@ PlayScene::~PlayScene()
 void PlayScene::draw()
 {
 	TextureManager::Instance()->draw("background",400,300,0,255,true);
-	TextureManager::Instance()->draw("enemy", 700, 300, 0, 255, true);
 
 	
 
@@ -140,9 +139,10 @@ void PlayScene::start()
 	addChild(m_pPlayer);
 	m_playerFacingRight = false;
 	
+
 	m_pEnemy = new Player();
 	addChild(m_pEnemy);
-	m_playerFacingRight = false;
+	m_playerFacingRight = true;
 
 	// Back Button
 	m_pBackButton = new Button("../Assets/textures/backButton.png", "backButton", BACK_BUTTON);

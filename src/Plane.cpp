@@ -3,26 +3,23 @@
 
 Plane::Plane()
 {
-	TextureManager::Instance()->loadSpriteSheet(
-		"../Assets/sprites/atlas.txt",
-		"../Assets/sprites/atlas.png", 
-		"spritesheet");
+	TextureManager::Instance()->load("../Assets/textures/enemy.png", "enemy1");
 
-	setSpriteSheet(TextureManager::Instance()->getSpriteSheet("spritesheet"));
+	//setSpriteSheet(TextureManager::Instance()->getSpriteSheet("spritesheet"));
 
 	// set frame width
-	setWidth(65);
+	setWidth(53);
 
 	// set frame height
-	setHeight(65);
+	setHeight(58);
 
-	getTransform()->position = glm::vec2(400.0f, 200.0f);
+	getTransform()->position = glm::vec2(400.0f, 700.0f);
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->isColliding = false;
 	setType(PLANE);
 
-	m_buildAnimations();
+	//m_buildAnimations();
 }
 
 Plane::~Plane()
@@ -35,9 +32,7 @@ void Plane::draw()
 	const auto y = getTransform()->position.y;
 
 	// draw the plane sprite with simple propeller animation
-	TextureManager::Instance()->playAnimation(
-		"spritesheet", getAnimation("plane"),
-		x, y, 0.5f, 0, 255, true);
+	TextureManager::Instance()->draw("enemy1", 400, 700, 0, 255, true);
 }
 
 void Plane::update()
