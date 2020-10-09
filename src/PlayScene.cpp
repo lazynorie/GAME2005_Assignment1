@@ -199,8 +199,12 @@ void PlayScene::GUI_Function() const
 
 	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
 	//ImGui::ShowDemoWindow();
+
+	
 	
 	ImGui::Begin("Physics Controll", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+
+	ImGui::Text("The scale is 1:1 ");
 	
 	if (ImGui::Button("Throw"))
 	{
@@ -241,9 +245,37 @@ void PlayScene::GUI_Function() const
 		
 
 	}
+
+
+	float distance;
+	if (xEnemyPos - xPlayerPos >= 0)
+	{
+		distance = xEnemyPos - xPlayerPos;
+	}
+	else
+	{
+		distance = xPlayerPos - xEnemyPos;
+	}
+	ImGui::Value("The distance between is: ", distance);
+
+	glm::vec2 speed = m_pBall->getRigidBody()->velocity;
+	ImGui::Value("ball speed X: ", speed.x);
+	ImGui::Value("ball speed Y: ", -speed.y);
+
+	static float mass=2.2;
+	ImGui::Value("The mass of the ball is: ", mass);
+
+
+	glm::vec2 acc = m_pBall->getRigidBody()->acceleration;
+	ImGui::Value("The acceleration of the ball is: ", acc.y);
 	
+	
+
+
+
+
 	static float velocity[2] = { 0,0 };
-	if (ImGui::SliderFloat2("Throw Speed", velocity, 0, 200))
+	if (ImGui::SliderFloat2("Throw Speed X, Y", velocity, 0, 200))
 	{
 		m_pBall->throwspeed = glm::vec2(velocity[0], -velocity[1]);
 	}
