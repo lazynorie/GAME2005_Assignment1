@@ -48,8 +48,6 @@ void Target::m_move()
 	float deltaTime = 1.0f / 60.0f;
 	glm::vec2 gravity = glm::vec2(0, 9.8f);
 
-	cout << getTransform()->position.y << endl;
-
 	if (getTransform()->position.y <= 400) {
 		/*if (!isGravityEnabled) getRigidBody()->velocity.y = 0;*/
 		if (isGravityEnabled)
@@ -77,5 +75,4 @@ void Target::doThrow()
 {
 	getTransform()->position = throwposition;
 	getRigidBody()->velocity = throwspeed;
-
 }
