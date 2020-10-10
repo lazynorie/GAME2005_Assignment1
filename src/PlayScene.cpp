@@ -161,12 +161,12 @@ void PlayScene::start()
 
 	/* Instructions Label */
 	m_pInstructionsLabel_1 = new Label("Press the backtick (`) to access the physics control.", "Consolas", 20, blue);
-	m_pInstructionsLabel_1->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.5f, 470.0f);
+	m_pInstructionsLabel_1->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.6f, 470.0f);
 
 	addChild(m_pInstructionsLabel_1);
 
 	m_pInstructionsLabel_2 = new Label("Set ALL(IMPORTANT!) the values before click on 'throw' button.", "Consolas", 20, blue);
-	m_pInstructionsLabel_2->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.5f, 500.0f);
+	m_pInstructionsLabel_2->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.6f, 500.0f);
 
 	addChild(m_pInstructionsLabel_2);
 }
@@ -233,7 +233,10 @@ void PlayScene::GUI_Function() const
 	}
 	ImGui::Value("The distance between is: ", distance);
 
+	ImGui::Value("The throwing distance is: ", m_pBall->getTransform()->position.x - xPlayerPos);
+	ImGui::Value("The throwing apex is: ", 400 - m_pBall->getTransform()->position.y);
 	glm::vec2 speed = m_pBall->getRigidBody()->velocity;
+
 	ImGui::Value("ball speed X-axis: ", speed.x);
 	ImGui::Value("ball speed Y-axis: ", -speed.y);
 
@@ -243,7 +246,6 @@ void PlayScene::GUI_Function() const
 
 	/*glm::vec2 acc = m_pBall->getRigidBody()->acceleration;
 	ImGui::Value("The acceleration of the ball is: ", acc.y);*/
-
 
 	float accc;
 	if (isGravityEnabled)
@@ -256,7 +258,6 @@ void PlayScene::GUI_Function() const
 	}
 	ImGui::Value("The acceleration of the ball is : ", accc);
 
-
 	//static float velocity[2] = { 0,0 };
 	//if (ImGui::SliderFloat2("Throw Speed X, Y", velocity, 0, 200))
 	//{
@@ -264,11 +265,13 @@ void PlayScene::GUI_Function() const
 	//}
 	static float velocity[2] = { 0,0 };
 
-	static float ballSpeed = 95;
+	static float ballSpeed = 95; //we set ball speed to a constant because that was what the first question said
 	static float ballAngle;
 	float angleRad;
-	
-	if ((ImGui::SliderFloat("Thrown angle", &ballAngle, 0, 90)) /*&& (ImGui::SliderFloat("Ball speed is: ", &ballSpeed, 0, 200))*/ ) {
+
+	ImGui::Value("ball speed: ", ballSpeed);
+	if (ImGui::SliderFloat("Thrown angle", &ballAngle, 0, 90)) {
+		/*if (ImGui::SliderFloat("Ball speed is: ", &ballSpeed, 0, 200))*/
 		angleRad = (ballAngle / 180) * M_PI;
 		velocity[0] = ballSpeed * cos(angleRad)*mpp;
 		velocity[1] = ballSpeed * sin(angleRad)*mpp;
